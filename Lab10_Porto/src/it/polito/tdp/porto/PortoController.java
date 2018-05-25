@@ -2,6 +2,10 @@ package it.polito.tdp.porto;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.porto.model.Author;
+import it.polito.tdp.porto.model.Model;
+import it.polito.tdp.porto.model.Paper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -16,21 +20,34 @@ public class PortoController {
     private URL location;
 
     @FXML
-    private ComboBox<?> boxPrimo;
+    private ComboBox<Author> boxPrimo;
 
     @FXML
-    private ComboBox<?> boxSecondo;
+    private ComboBox<Author> boxSecondo;
 
     @FXML
     private TextArea txtResult;
 
     @FXML
     void handleCoautori(ActionEvent event) {
+    	txtResult.clear();
+    	Author a=boxPrimo.getValue();
+        txtResult.appendText("Elenco coAutori: \n");
+        
+        for(Author author:model.getCoautori(a))
+        	txtResult.appendText(author+"\n");
 
     }
 
     @FXML
     void handleSequenza(ActionEvent event) {
+    	txtResult.clear();
+    	Author a1=boxPrimo.getValue();
+    	Author a2=boxPrimo.getValue();
+    	txtResult.appendText("Catena di papers: \n");
+    	for(Paper p:model.getPapers3(a1, a2))
+         	txtResult.appendText(p+"\n");
+    	
 
     }
 
@@ -41,4 +58,14 @@ public class PortoController {
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Porto.fxml'.";
 
     }
+    private Model model;
+
+	public void setModel(Model model) {
+		this.model=model;
+		boxPrimo.getItems().addAll(model.getAllAuthors());
+		boxSecondo.getItems().addAll(model.getAllAuthors());
+		
+		
+		
+	}
 }
