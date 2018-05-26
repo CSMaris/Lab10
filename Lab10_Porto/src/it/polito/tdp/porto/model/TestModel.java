@@ -8,8 +8,8 @@ public class TestModel {
 		
 		Model model = new Model();
 		PortoDAO dao=new PortoDAO();
-		Author a1=dao.getAutore(132);
-		Author a2=dao.getAutore(30669);
+		Author a1=dao.getAutore(85,model.getIdmapa());
+		Author a2=dao.getAutore(30669,model.getIdmapa());
 		System.out.println(model.getPapers3(a1, a2));
 		
 		

@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
 import org.jgrapht.traverse.GraphIterator;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+
 
 import it.polito.tdp.porto.db.PortoDAO;
 
@@ -37,6 +40,11 @@ public class Model {
 	return authors;
 	}
 	
+	
+	public AuthorIDMap getIdmapa() {
+		return idmapa;
+	}
+
 	private void creaGrafo() {
 		graph=new SimpleGraph<> (DefaultEdge.class);
 		Graphs.addAllVertices(graph, authors);
@@ -55,6 +63,19 @@ public class Model {
 	}
 	
 	public List<Paper> getPapers3(Author a1, Author a2){
+		
+		/*ShortestPathAlgorithm<Author,DefaultEdge> spa = new DijkstraShortestPath<>(graph);
+		GraphPath<Author,DefaultEdge> shortestPath=spa.getPath(a1,a2);*/
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
 		return null;	
 	}
 	

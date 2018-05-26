@@ -146,7 +146,7 @@ public class PortoDAO {
 	
 	
 	
-	public Author getAutore(int id) {
+	public Author getAutore(int id, AuthorIDMap map) {
 
 		final String sql = "SELECT * FROM author where id=?";
 
@@ -160,7 +160,7 @@ public class PortoDAO {
 			if (rs.next()) {
 
 				Author autore = new Author(rs.getInt("id"), rs.getString("lastname"), rs.getString("firstname"));
-				return autore;
+				return map.get(autore);
 			}
 
 			return null;
