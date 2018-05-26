@@ -1,6 +1,7 @@
 package it.polito.tdp.porto.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,6 @@ import org.jgrapht.traverse.BreadthFirstIterator;
 import org.jgrapht.traverse.GraphIterator;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-
 
 import it.polito.tdp.porto.db.PortoDAO;
 
@@ -64,19 +64,33 @@ public class Model {
 	
 	public List<Paper> getPapers3(Author a1, Author a2){
 		
-		/*ShortestPathAlgorithm<Author,DefaultEdge> spa = new DijkstraShortestPath<>(graph);
-		GraphPath<Author,DefaultEdge> shortestPath=spa.getPath(a1,a2);*/
-		
-		
-		
 		
 	
 		
+		ShortestPathAlgorithm<Author,DefaultEdge> spa = new DijkstraShortestPath<>(graph);
+		GraphPath<Author,DefaultEdge> shortestPath=spa.getPath(a1,a2);
+		List<Paper> papers=new ArrayList<>();
+		List<Author> authorList=new ArrayList<>(shortestPath.getVertexList());
 		
+		for(Author author:authorList) {
+			author.setListaPaper(dao.getPapersDatoAutore(idmapp, author));
+		}
 		
-		
-		
-		return null;	
+		for(int i=0;i<authorList.size();i++) {
+			Author a=authorList.get(i);
+			for(Paper p:a.getListaPaper()) {
+				if(i<authorList.size()-1) {
+				if(authorList.get(i+1).getListaPaper().contains(p)) {
+					papers.add(p);
+					break;
+				}
+				}
+				
+			}
+			
+		}
+	
+		return papers;	
 	}
 	
 

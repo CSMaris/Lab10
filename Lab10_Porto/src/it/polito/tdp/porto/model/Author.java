@@ -3,7 +3,7 @@ package it.polito.tdp.porto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Author {
+public class Author implements Comparable {
 
 	private int id;
 	private String lastname;
@@ -80,6 +80,12 @@ public class Author {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		Author a=(Author)arg0;
+		return this.lastname.compareTo(a.lastname);
 	}
 	
 	

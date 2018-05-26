@@ -1,6 +1,8 @@
 package it.polito.tdp.porto;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.porto.model.Author;
@@ -43,10 +45,13 @@ public class PortoController {
     void handleSequenza(ActionEvent event) {
     	txtResult.clear();
     	Author a1=boxPrimo.getValue();
-    	Author a2=boxPrimo.getValue();
+    	Author a2=boxSecondo.getValue();
     	txtResult.appendText("Catena di papers: \n");
+        
+    	
     	for(Paper p:model.getPapers3(a1, a2))
          	txtResult.appendText(p+"\n");
+    	
     	
 
     }
@@ -62,8 +67,11 @@ public class PortoController {
 
 	public void setModel(Model model) {
 		this.model=model;
-		boxPrimo.getItems().addAll(model.getAllAuthors());
-		boxSecondo.getItems().addAll(model.getAllAuthors());
+		List<Author> lista=model.getAllAuthors();
+		Collections.sort(lista);
+		
+		boxPrimo.getItems().addAll(lista);
+		boxSecondo.getItems().addAll(lista);
 		
 		
 		
